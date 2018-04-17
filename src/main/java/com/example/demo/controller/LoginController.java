@@ -9,6 +9,8 @@ import com.example.demo.service.FrinedsService;
 import com.example.demo.service.MessageService;
 import com.example.demo.service.RegService;
 import com.example.demo.util.mail.CodeEmailUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private AdminService adminService;
@@ -188,6 +192,7 @@ public class LoginController {
             if(CodeEmailUtil.codes.containsKey(email) && CodeEmailUtil.codes.get(email).equals(co)) {
                 CodeEmailUtil.codes.remove(email);
                 String num = regService.doReg(email,password,nickName);
+                log.debug("【用户注册】账户:"+num+",nickName:"+nickName+",密码:"+password+",邮箱:"+email);
                 model.addAttribute("number",num);
                 return "num";
             }else {

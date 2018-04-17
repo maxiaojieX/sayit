@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>好友</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="css/font-awesome.css">
 </head>
 <body>
 <div class="container">
@@ -41,9 +41,9 @@
 
         <ul class="list-group">
         <#list friends as friend>
-            <li class="list-group-item"><a href="#">${friend.nickName}</a><span style="margin-left: 10px">(什么签名啊啊)</span>
+            <li class="list-group-item fangwen" bid="${friend.bid}"><a href="#">${friend.nickName}</a><span style="margin-left: 10px">(什么签名啊啊)</span>
             <#--<span style="float: right"><a class="btn btn-default" href="#" role="button" style="position: relative;top: -7px">给TA留言</a></span>-->
-                <span style="float: right"><a class="btn btn-default fangwen" href="#" role="button" style="position: relative;top: -7px" bid="${friend.bid}">访问</a></span>
+                <span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span>
             </li>
         </#list>
         </ul>

@@ -16,7 +16,7 @@ public class CodeEmailUtil {
     public static Map<String,String> codes = new Hashtable<>();
 
     public static void sendMail(String to) throws MailSendException {
-        String title = "【Say id】账户注册";
+        String title = "【Say it】账户注册";
         String begin = "您的验证码是: ";
         String code = String.valueOf(System.currentTimeMillis()).substring(8,12);
         try {

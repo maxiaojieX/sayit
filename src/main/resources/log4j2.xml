@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+	
+
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d (%F:%L) %-5p - %m%n" />
+		</Console>
+
+		<RollingFile name="FILEOUT" fileName="/www/applog/sayit/app.log"
+					 filePattern="/www/applog/sayit/app-%d{yyyy-MM-dd}-%i.log.gz">
+
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="512 MB" />
+			</Policies>
+			<PatternLayout pattern="%d (%F:%L) %-5p - %m%n" />
+		</RollingFile>
+
+		<RollingFile name="SQL_STATEMENT" fileName="/www/applog/sayit/sql.log"
+					 filePattern="/www/applog/sayit/sql-%d{yyyy-MM-dd}-%i.log.gz">
+
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+										   modulate="true" />
+				<SizeBasedTriggeringPolicy size="512 MB" />
+			</Policies>
+			<PatternLayout pattern="%d (%F:%L) %-5p - %m%n" />
+		</RollingFile>
+
+		<RollingFile name="ERROR_LOG"
+					 fileName="/www/applog/sayit/error.log"
+					 filePattern="/www/applog/sayit/error-%d{yyyy-MM-dd}-%i.log.gz">
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="512 MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="Fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="Error" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+			<PatternLayout pattern="%d (%F:%L) %-5p - %m%n"/>
+		</RollingFile>
+
+	</Appenders>
+
+
+	<Loggers>
+		<Root level="info">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILEOUT" />
+		</Root>
+		<Logger name="com.ghw.h5.platform" level="debug" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILEOUT" />
+			<appender-ref ref="ERROR_LOG"/>
+		</Logger>
+	</Loggers>
+</Configuration>

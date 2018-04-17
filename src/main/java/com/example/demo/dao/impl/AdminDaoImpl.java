@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @author xiaojie.Ma
  * Created by xiaojie.Ma on 2018/3/19.
@@ -37,5 +39,11 @@ public class AdminDaoImpl implements AdminDao {
     public void save(String user, String password,String nickName, String email) {
         String sql = "INSERT INTO admin (user,password,nick_name,other) VALUES (?,?,?,?)";
         jdbcTemplate.update(sql,new Object[]{user,password,nickName,email});
+    }
+
+    @Override
+    public List<Admin> findAll() {
+        String sql = "select * from admin";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper(Admin.class));
     }
 }
