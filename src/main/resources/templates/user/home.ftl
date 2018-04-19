@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
+    <link rel="shortcut icon" href="img/SSS.ico"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
@@ -47,7 +48,7 @@
                 <div class="panel-heading">
 
                     <div class="touxiang" style="display: inline-block">
-                        <img src="img/${content.sex}" alt="..." class="img-circle my" style="width: 50px">
+                        <img src="img/${content.headPortraitUrl}" alt="..." class="img-circle my" style="width: 50px">
                     </div>
                     <div class="ziliao" style="display: inline-block">
                         <div class="na">${content.nickName}</div>
@@ -59,6 +60,9 @@
                 </div>
             </div>
             </#list>
+            <#if messages?size=0>
+                <center><h4 style="color: dimgrey">空空如也，快去发表吧...</h4></center>
+            </#if>
         </div>
 
     </div>

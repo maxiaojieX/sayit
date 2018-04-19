@@ -2,19 +2,10 @@ package com.example.demo;
 
 
 
-import com.example.demo.bean.Admin;
-import com.example.demo.bean.AdminConfig;
-import com.example.demo.dao.AdminConfigDao;
-import com.example.demo.dao.AdminDao;
-import com.example.demo.util.mail.MailUtil;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 /**
  * Created by xiaojie.Ma on 2018/3/20.
@@ -37,6 +28,14 @@ public class Test {
        String c = String.valueOf(System.currentTimeMillis()).substring(9,13);
         System.out.println(c);
     }
-
+    @org.junit.Test
+    public void splidTest() {
+        String name= "service-page-feign";
+        String[] s=name.split("service-page");
+        if(s[1].startsWith("-")) {
+            System.out.println("TRUE");
+        }
+        System.out.println(s.length);
+    }
 
 }

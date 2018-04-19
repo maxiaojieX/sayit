@@ -100,4 +100,14 @@ public class Message {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+    private String headPortraitUrl;
+
+    public String getHeadPortraitUrl() {
+        return headPortraitUrl;
+    }
+
+    public void setHeadPortraitUrl(String headPortraitUrl) {
+        this.headPortraitUrl = headPortraitUrl;
+    }
 }

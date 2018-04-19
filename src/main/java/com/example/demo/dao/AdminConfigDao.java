@@ -14,4 +14,7 @@ public interface AdminConfigDao {
 
     AdminConfig findByAdminId(Integer id);
 
+    void save(AdminConfig adminConfig);
+
+    void update(AdminConfig adminConfig);
 }

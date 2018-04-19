@@ -87,4 +87,19 @@ public class AdminConfig {
     public void setReserve1(String reserve1) {
         this.reserve1 = reserve1;
     }
+
+    @Override
+    public String toString() {
+        return "AdminConfig{" +
+                "id=" + id +
+                ", adminId=" + adminId +
+                ", autograph='" + autograph + '\'' +
+                ", headPortraitUrl='" + headPortraitUrl + '\'' +
+                ", sex=" + sex +
+                ", welcoming='" + welcoming + '\'' +
+                ", email='" + email + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", reserve1='" + reserve1 + '\'' +
+                '}';
+    }
 }

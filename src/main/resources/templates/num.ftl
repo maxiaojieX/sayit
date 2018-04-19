@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册成功</title>
+    <link rel="shortcut icon" href="img/SSS.ico"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
 </head>

@@ -24,7 +24,7 @@ public class FriendsDaoImpl implements FriendsDao {
 
     @Override
     public List<Friends> findByAid(Integer aid) {
-        String sql = "SELECT bid,nick_name FROM admin INNER JOIN friends ON admin.id = bid WHERE aid=?";
+        String sql = "SELECT bid,nick_name,autograph FROM admin_config INNER JOIN friends ON admin_config.admin_id = bid WHERE aid=?";
         return jdbcTemplate.query(sql,new Object[]{aid},new BeanPropertyRowMapper(Friends.class));
     }
 

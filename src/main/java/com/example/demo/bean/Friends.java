@@ -43,4 +43,14 @@ public class Friends {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
+    private String autograph;
+
+    public String getAutograph() {
+        return autograph;
+    }
+
+    public void setAutograph(String autograph) {
+        this.autograph = autograph;
+    }
 }

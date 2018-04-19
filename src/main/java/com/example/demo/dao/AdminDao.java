@@ -12,7 +12,7 @@ public interface AdminDao {
 
     Admin findByUserName(String username);
 
-    void save(String user,String password,String nickName,String email);
+    Integer save(String user,String password);
 
     List<Admin> findAll();
 }

@@ -50,10 +50,14 @@
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILEOUT" />
 		</Root>
-		<Logger name="com.ghw.h5.platform" level="debug" additivity="false">
+		<Logger name="com.example.demo" level="debug" additivity="false">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILEOUT" />
 			<appender-ref ref="ERROR_LOG"/>
+		</Logger>
+		<Logger name="druid.sql.Statement" level="debug" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="SQL_STATEMENT" />
 		</Logger>
 	</Loggers>
 </Configuration>

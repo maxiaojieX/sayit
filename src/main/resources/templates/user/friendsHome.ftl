@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>我的</title>
+    <link rel="shortcut icon" href="img/SSS.ico"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
@@ -50,7 +51,7 @@
     <div class="panel-heading">
         <div class="contentstop">
             <div class="touxiang" style="display: inline-block">
-                <img src="img/${content.sex}" alt="..." class="img-circle my" style="width: 50px">
+                <img src="img/${content.headPortraitUrl}" alt="..." class="img-circle my" style="width: 50px">
             </div>
             <div class="ziliao" style="display: inline-block;">
                 <div class="na">${content.nickName}</div>

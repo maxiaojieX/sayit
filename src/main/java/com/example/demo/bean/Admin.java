@@ -9,8 +9,6 @@ public class Admin {
     private Integer id;
     private String user;
     private String password;
-    private String nickName;
-    private String other;
 
     public Integer getId() {
         return id;
@@ -36,29 +34,4 @@ public class Admin {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getOther() {
-        return other;
-    }
-
-    public void setOther(String other) {
-        this.other = other;
-    }
-
-    private String sex;
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 }

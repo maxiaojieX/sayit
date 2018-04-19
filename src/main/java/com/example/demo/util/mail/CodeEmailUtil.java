@@ -15,17 +15,18 @@ public class CodeEmailUtil {
 
     public static Map<String,String> codes = new Hashtable<>();
 
-    public static void sendMail(String to) throws MailSendException {
+    public static boolean sendMail(String to) throws MailSendException {
         String title = "【Say it】账户注册";
         String begin = "您的验证码是: ";
         String code = String.valueOf(System.currentTimeMillis()).substring(8,12);
         try {
             codes.put(to,code);
-            MailUtil.sendHtmlMail(to,title,"您的验证码是:"+code+"。如果你没有进行相关操作，请忽略该邮件。");
+            MailUtil.sendHtmlMail(to,title,"您的注册验证码是【"+code+"】，请不要把验证码泄漏给其他人，如非本人请勿操作。");
+            return true;
         } catch (MessagingException e) {
-            e.printStackTrace();
+            return false;
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            return false;
         }
     }
 

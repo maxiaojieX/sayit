@@ -21,7 +21,7 @@ public class MessageDaoImpl implements MessageDao {
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<Message> findMine(Integer aid) {
-        String sql = "SELECT aid,content,create_time,level,nick_name,sex FROM message INNER JOIN admin ON message.by=admin.id WHERE aid=? ORDER BY create_time DESC";
+        String sql = "SELECT aid,content,create_time,level,nick_name,sex,head_portrait_url FROM message INNER JOIN admin_config ON message.by=admin_id WHERE aid=? ORDER BY create_time DESC";
         return jdbcTemplate.query(sql,new Object[]{aid},new BeanPropertyRowMapper(Message.class));
     }
 
@@ -34,7 +34,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public List<Message> findByAdi(Integer aid) {
 //        TODO 只查询未隐藏的
-        String sql = "SELECT aid,content,create_time,level,nick_name,sex FROM message INNER JOIN admin ON message.by=admin.id WHERE aid=? ORDER BY create_time DESC";
+        String sql = "SELECT aid,content,create_time,level,nick_name,sex,head_portrait_url FROM message INNER JOIN admin_config ON message.by=admin_id WHERE aid=? ORDER BY create_time DESC";
         return jdbcTemplate.query(sql,new Object[]{aid},new BeanPropertyRowMapper(Message.class));
     }
 

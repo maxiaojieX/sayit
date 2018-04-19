@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.bean.AdminConfig;
+import com.example.demo.dao.AdminConfigDao;
 import com.example.demo.dao.AdminDao;
 import com.example.demo.service.RegService;
 import com.example.demo.util.GetAccountNumberUtil;
@@ -15,10 +17,17 @@ public class RegServiceImpl implements RegService {
 
     @Autowired
     private AdminDao adminDao;
+    @Autowired
+    private AdminConfigDao adminConfigDao;
     @Override
     public String doReg(String email, String password,String nickName) {
         String user = GetAccountNumberUtil.getAccountNum();
-        adminDao.save(user,password,nickName,email);
+        Integer id = adminDao.save(user,password);
+        AdminConfig adminConfig = new AdminConfig();
+        adminConfig.setAdminId(id);
+        adminConfig.setEmail(email);
+        adminConfig.setNickName(nickName);
+        adminConfigDao.save(adminConfig);
         return user;
     }
 }

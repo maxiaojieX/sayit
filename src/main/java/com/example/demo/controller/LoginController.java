@@ -2,12 +2,10 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.bean.Admin;
+import com.example.demo.bean.AdminConfig;
 import com.example.demo.bean.Friends;
 import com.example.demo.bean.Message;
-import com.example.demo.service.AdminService;
-import com.example.demo.service.FrinedsService;
-import com.example.demo.service.MessageService;
-import com.example.demo.service.RegService;
+import com.example.demo.service.*;
 import com.example.demo.util.mail.CodeEmailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +41,8 @@ public class LoginController {
     private FrinedsService frinedsService;
     @Autowired
     private RegService regService;
+    @Autowired
+    private AdminConfigService adminConfigService;
     @GetMapping("/")
     public String index(Model model,@RequestParam(required = false) String msg) {
         if(msg != null) {
@@ -72,7 +72,8 @@ public class LoginController {
     public String home(Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("user");
-        model.addAttribute("sex",admin.getSex());
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
+        model.addAttribute("sex",adminConfig.getHeadPortraitUrl());
         List<Message> messages = messageService.findAllByAid(admin.getId());
 
         model.addAttribute("messages",messages);
@@ -84,7 +85,8 @@ public class LoginController {
     public String edit(String id,Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("user");
-        model.addAttribute("sex",admin.getSex());
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
+        model.addAttribute("sex",adminConfig.getHeadPortraitUrl());
         model.addAttribute("aid",id);
         return "user/edit";
     }
@@ -94,7 +96,8 @@ public class LoginController {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("user");
         List<Friends> friends = frinedsService.findAll(admin.getId());
-        model.addAttribute("sex",admin.getSex());
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
+        model.addAttribute("sex",adminConfig.getHeadPortraitUrl());
         model.addAttribute("friends",friends);
         return "user/friends";
     }
@@ -129,7 +132,8 @@ public class LoginController {
     public String friendsHome(String bid,Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("user");
-        model.addAttribute("sex",admin.getSex());
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
+        model.addAttribute("sex",adminConfig.getHeadPortraitUrl());
         List<Message> messages = messageService.findByAid(Integer.parseInt(bid));
         model.addAttribute("aid",bid);
         model.addAttribute("messages",messages);
@@ -140,11 +144,12 @@ public class LoginController {
     @ResponseBody
     public String findFriends(String name) {
         Admin admin = frinedsService.findByName(name);
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
 
         if(admin == null) {
             return "NONE";
         }else {
-            String json = admin.getId()+"_"+admin.getSex()+"_"+admin.getNickName();
+            String json = admin.getId()+"_"+adminConfig.getHeadPortraitUrl()+"_"+adminConfig.getNickName();
             return json;
         }
     }
@@ -170,12 +175,14 @@ public class LoginController {
             return "请勿重新请求";
         }else {
             try {
-                CodeEmailUtil.sendMail(email);
+                if(CodeEmailUtil.sendMail(email)) {
+                    return "验证码已发送成功!";
+                }else {
+                    return  "验证码发送失败";
+                }
             }catch (MailSendException m){
                 return "请输入正确邮箱";
             }
-            return "验证码已发送成功!";
-
         }
     }
 
@@ -205,7 +212,9 @@ public class LoginController {
     public String config(Model model,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("user");
-        model.addAttribute("sex",admin.getSex());
+        AdminConfig adminConfig = adminConfigService.findById(admin.getId());
+        model.addAttribute("adminConfig",adminConfig);
+        model.addAttribute("sex",adminConfig.getHeadPortraitUrl());
         return "user/userConfig";
     }
 

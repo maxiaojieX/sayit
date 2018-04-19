@@ -18,7 +18,7 @@
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <a class="navbar-brand" href="/home">返回</a>
-                        <a class="navbar-brand" style="float: right" id="saveForm">保存</a>
+                    <#--<a class="navbar-brand" style="float: right" href="#">编辑</a>-->
                     </div>
                 </div><!-- /.container-fluid -->
             </nav>
@@ -41,7 +41,6 @@
     <div class="row clearfix" style="margin-top: 50px;margin-bottom: 50px; >
 
         <div class="col-md-12 column">
-
     <ul class="list-group">
         <li class="list-group-item">
             <div>
@@ -49,43 +48,20 @@
                 <h3 style="display: inline-block;font-weight: bold"> &nbsp;${adminConfig.nickName}</h3>
             </div>
             <br>
+            签名:<span>${adminConfig.autograph}</span>
         </li>
+
+        <li class="list-group-item modify" rel="${adminConfig.nickName}">修改昵称<span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+        <li class="list-group-item modify" rel="${adminConfig.autograph}">修改签名 <span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+        <li class="list-group-item modify" rel="${adminConfig.welcoming}">设置欢迎语<span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+        <li class="list-group-item modifySex" rel="${adminConfig.sex}">修改性别<span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+        <li class="list-group-item" >修改头像 (暂未开放)<span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+        <li class="list-group-item modify">修改密码<span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span></li>
+
     </ul>
-<div class="container">
-    <form class="form-horizontal" action="/saveConfig" id="configForm" method="post">
-        <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">昵称</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="nickName" id="inputEmail3" value="${adminConfig.nickName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">签名</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="autograph" id="inputPassword3" value="${adminConfig.autograph}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword4" class="col-sm-2 control-label">欢迎语</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="welcoming" id="inputPassword4" value="${adminConfig.welcoming}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword4" class="col-sm-2 control-label">性别</label>
-            <div class="col-sm-10">
-                <select class="form-control" name="sex">
-                    <option value="1" <#if adminConfig.sex==1>selected</#if>>男</option>
-                    <option value="0" <#if adminConfig.sex==0>selected</#if>>女</option>
-                </select>
-            </div>
-        </div>
-
-    </form>
 </div>
-        </div>
 
-    </div>
+</div>
 
 </div>
 <script src="js/jQuery/jquery-2.2.3.min.js"></script>
@@ -93,16 +69,6 @@
 <script>
     $(function () {
 
-          $("#saveForm").click(function () {
-              $.post("/saveConfig",$("#configForm").serialize()).done(function (json) {
-                  if(json == "SUCCESS") {
-                      layer.msg("修改成功");
-                      setTimeout(function(){history.go(0)},800);
-                  }else {
-                      layer.msg("修改失败，请稍后再试");
-                  }
-              });
-          });
     });
 </script>
 </body>

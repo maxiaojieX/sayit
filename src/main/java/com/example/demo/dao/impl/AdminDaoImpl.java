@@ -26,19 +26,25 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public Admin findByUserName(String username) {
         String sql = "SELECT * from admin where admin.user=?";
-        Admin admin;
-        try{
-            admin =jdbcTemplate.queryForObject(sql,new Object[]{username},new BeanPropertyRowMapper<Admin>(Admin.class));
-        }catch (EmptyResultDataAccessException e){
-            admin = null;
+        List<Admin> admins = jdbcTemplate.query(sql,new Object[]{username},new BeanPropertyRowMapper(Admin.class));
+        if(admins != null && admins.size() != 0) {
+            return admins.get(0);
+        }else {
+            return null;
         }
-        return admin;
     }
 
     @Override
-    public void save(String user, String password,String nickName, String email) {
-        String sql = "INSERT INTO admin (user,password,nick_name,other) VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql,new Object[]{user,password,nickName,email});
+    public Integer save(String user, String password) {
+        String sql = "INSERT INTO admin (user,password) VALUES (?,?)";
+        if(jdbcTemplate.update(sql,new Object[]{user,password}) != 0){
+            String sql2 = "select * from admin where admin.user=? and password=?";
+            Admin admin = jdbcTemplate.queryForObject(sql2,new Object[]{user,password},new BeanPropertyRowMapper<Admin>(Admin.class));
+            return admin.getId();
+        }else {
+            return -1;
+        }
+
     }
 
     @Override

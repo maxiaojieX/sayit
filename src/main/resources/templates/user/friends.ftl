@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>好友</title>
+    <link rel="shortcut icon" href="img/SSS.ico"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.css">
 </head>
@@ -41,11 +42,14 @@
 
         <ul class="list-group">
         <#list friends as friend>
-            <li class="list-group-item fangwen" bid="${friend.bid}"><a href="#">${friend.nickName}</a><span style="margin-left: 10px">(什么签名啊啊)</span>
+            <li class="list-group-item fangwen" bid="${friend.bid}"><a href="#">${friend.nickName}</a><span style="margin-left: 10px"><small>${friend.autograph}</small></span>
             <#--<span style="float: right"><a class="btn btn-default" href="#" role="button" style="position: relative;top: -7px">给TA留言</a></span>-->
                 <span style="float: right"><i class="icon-angle-right" aria-hidden="true"></i></span>
             </li>
         </#list>
+            <#if friends?size=0>
+                <center><h4 style="color: dimgrey">你还没有添加任何好友...</h4></center>
+            </#if>
         </ul>
     </div>
 </div>
